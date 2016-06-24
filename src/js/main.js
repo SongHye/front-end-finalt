@@ -1,5 +1,4 @@
-(function($, global, app){
-
+(function ($, global, app) {
 
   var $noteStringField = $('#noteString');
   var $listDom = $('#noteList');
@@ -34,7 +33,5 @@
     console.log(initData)
     app.collection.set( initData );
   }
-
-
 
 })(jQuery, window, MyNote);
