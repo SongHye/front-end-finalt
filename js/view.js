@@ -1,3 +1,6 @@
+
+  var save = document.getElementById("notesave");
+
 (function($, app){
 
 
@@ -10,24 +13,26 @@
       var $field = $(event.currentTarget);
       var fieldValue = $field.val();
 
-      if (event.keyCode !== 13 || fieldValue === "") {
+//      if (event.keyCode !== 13 || fieldValue === "") {
+//
+//        console.log('event stop');
+//        return false;
+//      }
+      
+      save.addEventListener('click', function() {
+        $field.val('');
 
-        console.log('event stop');
-        return false;
-      }
+        var note = $.extend({}, app.model, {
+          id: app.util.uniqId(),
+          context: fieldValue
+        });
 
-      $field.val('');
-
-      var memo = $.extend({}, app.model, {
-        id: app.util.uniqId(),
-        context: fieldValue
+        //console.log('new​ note.model:', note);
+        app.collection.add(note);
       });
-
-      //console.log('new​ note.model:', note);
-      app.collection.add(memo);
     },
     render: function(){
-      $listDom.html(tmpl( memoTemplateHtml, {notes: app.collection.toJSON() } ));
+      $listDom.html(tmpl( noteTemplateHtml, {notes: app.collection.toJSON() } ));
     }
   };
 
